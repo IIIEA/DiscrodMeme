@@ -4,51 +4,51 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _stepSize;
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _snapDistance;
 
+    private Vector3 _startPosition;
     private Vector3 _targetPosition;
-
-    private void Start()
-    {
-        _targetPosition = transform.position;
-    }
+    private bool _isMoving;
 
     private void Update()
     {
-        if (transform.position != _targetPosition)
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _moveSpeed * Time.deltaTime);
-    }
+        if (_isMoving)
+        {
+            if(Vector3.Distance(_startPosition, transform.position) > 1f)
+            {
+                transform.position = _targetPosition;
+                _isMoving = false;
+                return;
+            }
 
-    public void MoveUp()
-    {
-        SetNextPositionZ(_stepSize);
-    }
+            transform.position += (_targetPosition - _startPosition) * _movementSpeed * Time.deltaTime;
+            return;
+        }
 
-    public void MoveDown()
-    {
-        SetNextPositionZ(-_stepSize);
-    }
-
-    public void MoveRight()
-    {
-
-        SetNextPositionX(_stepSize);
-
-    }
-
-    public void MoveLeft()
-    {
-        SetNextPositionX(-_stepSize);
-    }
-
-    private void SetNextPositionX(float stepSize)
-    {
-        _targetPosition = new Vector3(_targetPosition.x + stepSize, _targetPosition.y, _targetPosition.z);
-    }
-
-    private void SetNextPositionZ(float stepSize)
-    {
-        _targetPosition = new Vector3(_targetPosition.x, _targetPosition.y, _targetPosition.z + stepSize);
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            _targetPosition = transform.position + Vector3.forward;
+            _startPosition = transform.position;
+            _isMoving = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            _targetPosition = transform.position + Vector3.back;
+            _startPosition = transform.position;
+            _isMoving = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            _targetPosition = transform.position + Vector3.left;
+            _startPosition = transform.position;
+            _isMoving = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            _targetPosition = transform.position + Vector3.right;
+            _startPosition = transform.position;
+            _isMoving = true;
+        }
     }
 }

@@ -1,5 +1,5 @@
 
-=== Wed Jan 12 17:05:44 2022
+=== Thu Jan 13 02:25:08 2022
 
 Packages were changed.
 Update Mode: mergeDefaultDependencies
@@ -44,3 +44,5 @@ The following packages were added:
   com.unity.textmeshpro@2.1.6
   com.unity.timeline@1.2.18
   com.unity.ugui@1.0.0
+The following packages were updated:
+  com.unity.postprocessing from version 2.1.4 to 3.1.1
