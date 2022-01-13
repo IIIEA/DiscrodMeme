@@ -24,6 +24,11 @@ public class GridCell : MonoBehaviour
         return new Vector3Int(PosX, PosY, PosZ);
     }
 
+    public void SetOccupied(bool value)
+    {
+        _isOccupied = value;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<PlayerMovement>(out PlayerMovement player))

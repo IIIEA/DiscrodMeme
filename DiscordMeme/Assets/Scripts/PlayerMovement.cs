@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _snapDistance;
     [SerializeField] private float _rotationSpeed = 0.1f;
 
     private Vector3 _startPosition;
@@ -14,12 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isMoving;
     private bool _isRotates;
 
-    private Collider _collider;
-
-    private void Start()
-    {
-        _collider = GetComponentInChildren<Collider>();
-    }
+    public string Index { get; private set; }
 
     private void Update()
     {
@@ -46,43 +40,46 @@ public class PlayerMovement : MonoBehaviour
             transform.position += (_targetPosition - _startPosition) * _movementSpeed * Time.deltaTime;
             return;
         }
-
-        Move();
     }
 
-    private void Move()
+    public void Move(string direction)
     {
-        if (Input.GetKeyDown(KeyCode.W))
+
+        switch (direction)
         {
-            _moveDirection = (Vector3.forward);
-            _targetPosition = transform.position + Vector3.forward;
-            _startPosition = transform.position;
-            _isMoving = true;
-            _isRotates = true;
+            case "Up":
+                _moveDirection = (Vector3.forward);
+                _targetPosition = transform.position + Vector3.forward;
+                _startPosition = transform.position;
+                _isMoving = true;
+                _isRotates = true;
+                break;
+            case "Down":
+                _moveDirection = (Vector3.back);
+                _targetPosition = transform.position + Vector3.back;
+                _startPosition = transform.position;
+                _isMoving = true;
+                _isRotates = true;
+                break;
+            case "Left":
+                _moveDirection = (Vector3.left);
+                _targetPosition = transform.position + Vector3.left;
+                _startPosition = transform.position;
+                _isMoving = true;
+                _isRotates = true;
+                break;
+            case "Right":
+                _moveDirection = (Vector3.right);
+                _targetPosition = transform.position + Vector3.right;
+                _startPosition = transform.position;
+                _isMoving = true;
+                _isRotates = true;
+                break;
         }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            _moveDirection = (Vector3.back);
-            _targetPosition = transform.position + Vector3.back;
-            _startPosition = transform.position;
-            _isMoving = true;
-            _isRotates = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            _moveDirection = (Vector3.left);
-            _targetPosition = transform.position + Vector3.left;
-            _startPosition = transform.position;
-            _isMoving = true;
-            _isRotates = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            _moveDirection = (Vector3.right);
-            _targetPosition = transform.position + Vector3.right;
-            _startPosition = transform.position;
-            _isMoving = true;
-            _isRotates = true;
-        }
+    }
+
+    public void SetIndex(string index)
+    {
+        Index = index;
     }
 }

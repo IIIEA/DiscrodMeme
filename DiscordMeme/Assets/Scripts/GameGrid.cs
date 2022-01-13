@@ -16,21 +16,6 @@ public class GameGrid : MonoBehaviour
         Create(_height, _weight);
     }
 
-    public Vector3[] GetCellsPositions()
-    {
-        Vector3[] cellsPositions = new Vector3[_height*_weight];
-
-        for (int i = 0; i < _height; i++)
-        {
-            for (int j = 0; j < _weight; j++)
-            {
-                cellsPositions[i] = _grid[i, j].transform.position;
-            }
-        }
-
-        return cellsPositions;
-    }
-
     private void Create(int height, int weight)
     {
         if (_cellTemplate == null)
@@ -49,4 +34,24 @@ public class GameGrid : MonoBehaviour
             }
         }
     }
+
+    public Vector3 GetRandomSpawnPoint()
+    {
+        int randomPosX = Random.Range(0, _height);
+        int randomPosZ = Random.Range(0, _weight);
+
+        do
+        {
+            if (_grid[randomPosX, randomPosZ].IsOccupied)
+            {
+                randomPosX = Random.Range(0, _height);
+                randomPosZ = Random.Range(0, _weight);
+            }
+        }
+        while (_grid[randomPosX, randomPosZ].IsOccupied);
+
+        _grid[randomPosX, randomPosZ].SetOccupied(true);
+
+        return _grid[randomPosX, randomPosZ].GetPosition();
+    }   
 }
