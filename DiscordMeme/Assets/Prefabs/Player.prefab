@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 5
-  _snapDistance: 1
   _rotationSpeed: 0.1
 --- !u!54 &7411678019284460554
 Rigidbody:
@@ -92,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6514098e4cd7867428960b25654d4466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerMovement: {fileID: 7411678019284460552}
 --- !u!1001 &7411678018973165318
 PrefabInstance:
   m_ObjectHideFlags: 0

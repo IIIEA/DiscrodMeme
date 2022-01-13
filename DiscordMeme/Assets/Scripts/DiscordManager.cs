@@ -16,8 +16,7 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
     public event UnityAction<string, string> PlayerAdded;
 
     [SerializeField] private List<string> _users = new List<string>();
-    [SerializeField] private PlayerMovement[] _players;
-    private int index = 0;
+    [SerializeField] private Player[] _players;
 
     #region Singleton
     public static DiscordManager Singleton { get; private set; }
@@ -133,12 +132,7 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
         {
             if (message.Content.Contains("!start"))
             {
-                _players = GetComponentsInChildren<PlayerMovement>();
-
-                for (int i = 0; i < _users.Count; i++)
-                {
-                    _players[i].SetIndex(_users[i]);
-                }
+                _players = GetComponentsInChildren<Player>();
 
                 await DiscordAPI.CreateMessage(message.ChannelId, "Started", null, false, null, null, null, null);
             }
@@ -235,7 +229,7 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
                 if (_users.Contains(messageReaction.UserId) == false)
                 {
                     _users.Add(messageReaction.UserId);
-                    PlayerAdded?.Invoke(messageReaction.Member.Nick, messageReaction.UserId);
+                    PlayerAdded?.Invoke(messageReaction.UserId, messageReaction.Member.Nick);
 
                     await Task.Delay(20);
                 }
@@ -259,6 +253,7 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
                 {
                     if (_players[i].Index == messageReaction.UserId)
                     {
+                        Debug.Log(_players[i].Name);
                         _players[i].Move("Left");
                     }
                 }

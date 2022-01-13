@@ -13,8 +13,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _isMoving;
     private bool _isRotates;
 
-    public string Index { get; private set; }
-
     private void Update()
     {
         if (_isRotates)
@@ -76,10 +74,5 @@ public class PlayerMovement : MonoBehaviour
                 _isRotates = true;
                 break;
         }
-    }
-
-    public void SetIndex(string index)
-    {
-        Index = index;
     }
 }

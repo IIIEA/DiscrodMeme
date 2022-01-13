@@ -107,6 +107,7 @@
     <Compile Include="Assets\DiscordUnity\State\DiscordUser.cs" />
     <Compile Include="Assets\DiscordUnity\State\DiscordVoiceState.cs" />
     <Compile Include="Assets\Prefabs\Jammo-Character\Scripts\CharacterSkinController.cs" />
+    <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\DiscordManager.cs" />
     <Compile Include="Assets\Scripts\GameGrid.cs" />
     <Compile Include="Assets\Scripts\GridCell.cs" />
