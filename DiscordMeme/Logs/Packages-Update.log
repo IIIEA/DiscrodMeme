@@ -46,3 +46,13 @@ The following packages were added:
   com.unity.ugui@1.0.0
 The following packages were updated:
   com.unity.postprocessing from version 2.1.4 to 3.1.1
+
+=== Thu Jan 13 16:25:38 2022
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.cinemachine@2.3.4
+  com.unity.ext.nunit@1.0.0
+  com.unity.recorder@2.0.3-preview.1
