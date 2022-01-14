@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private int _health;
+    [SerializeField] private Bullet _bulletTemplate;
+    [SerializeField] private Transform _shootPoint;
 
-    private string _index;
-    private string _nickName;
+    private int _currentHealth;
 
-    public string Index => _index;
-    public string Name => _nickName;
-
-    public void Init(string index, string nickName)
+    private void Start()
     {
-        _index = index;
-        _nickName = nickName;
+        _currentHealth = _health;
     }
 
-    public void Move(string direction)
+    public void Shoot()
     {
-        _playerMovement.Move(direction);
+        Instantiate(_bulletTemplate, _shootPoint.position, transform.rotation, transform);
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        _currentHealth -= damage;
+
+        if(_currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

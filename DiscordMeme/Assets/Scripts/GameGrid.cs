@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameGrid : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
     [SerializeField] private int _height;
     [SerializeField] private int _weight;
     [SerializeField] private float _gridCellSize = 1f;
@@ -22,6 +23,8 @@ public class GameGrid : MonoBehaviour
             Debug.LogError("Cell template is empty");
 
         _grid = new GridCell[height, weight];
+
+        _camera.transform.position = new Vector3(weight / 2, height / 1.3f, _camera.transform.position.z);
 
         for (int x = 0; x < _height; x++)
         {

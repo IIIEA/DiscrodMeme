@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private DiscordManager _discordManager;
     [SerializeField] private GameGrid _gameGrid;
-    [SerializeField] private Player _playerTemplate;
+    [SerializeField] private PlayerData _playerTemplate;
 
     private void OnEnable()
     {

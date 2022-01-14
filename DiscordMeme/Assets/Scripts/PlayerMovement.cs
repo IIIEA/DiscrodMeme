@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Transform _rayPoint;
     [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _rotationSpeed = 0.1f;
+    [SerializeField] private float _rayLenght;
 
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
@@ -13,17 +14,20 @@ public class PlayerMovement : MonoBehaviour
     private bool _isMoving;
     private bool _isRotates;
 
+    private const string Up = "Up";
+    private const string Down = "Down";
+    private const string Left = "Left";
+    private const string Right = "Right";
+
     private void Update()
     {
         if (_isRotates)
         {
             if(Vector3.Angle(Vector3.forward, _moveDirection)>1f || Vector3.Angle(Vector3.forward, _moveDirection) == 0f)
             {
-                Vector3 direction = Vector3.RotateTowards(transform.forward, _moveDirection, _movementSpeed, _rotationSpeed);
+                transform.rotation = Quaternion.LookRotation(_moveDirection);
                 _isRotates = false;
             }
-
-            transform.rotation = Quaternion.LookRotation(_moveDirection);
         }
 
         if (_isMoving)
@@ -45,32 +49,47 @@ public class PlayerMovement : MonoBehaviour
 
         switch (direction)
         {
-            case "Up":
+            case Up:
                 _moveDirection = (Vector3.forward);
-                _targetPosition = transform.position + Vector3.forward;
-                _startPosition = transform.position;
-                _isMoving = true;
+                if (!Physics.Raycast(_rayPoint.position, Vector3.forward, _rayLenght))
+                {
+                    _targetPosition = transform.position + Vector3.forward;
+                    _startPosition = transform.position;
+                    _isMoving = true;
+                }
                 _isRotates = true;
                 break;
-            case "Down":
+
+            case Down:
                 _moveDirection = (Vector3.back);
-                _targetPosition = transform.position + Vector3.back;
-                _startPosition = transform.position;
-                _isMoving = true;
+                if (!Physics.Raycast(_rayPoint.position, Vector3.back, _rayLenght))
+                {
+                    _targetPosition = transform.position + Vector3.back;
+                    _startPosition = transform.position;
+                    _isMoving = true;
+                }
                 _isRotates = true;
                 break;
-            case "Left":
+
+            case Left:
                 _moveDirection = (Vector3.left);
-                _targetPosition = transform.position + Vector3.left;
-                _startPosition = transform.position;
-                _isMoving = true;
+                if (!Physics.Raycast(_rayPoint.position, Vector3.left, _rayLenght))
+                {
+                    _targetPosition = transform.position + Vector3.left;
+                    _startPosition = transform.position;
+                    _isMoving = true;
+                }
                 _isRotates = true;
                 break;
-            case "Right":
+
+            case Right:
                 _moveDirection = (Vector3.right);
-                _targetPosition = transform.position + Vector3.right;
-                _startPosition = transform.position;
-                _isMoving = true;
+                if (!Physics.Raycast(_rayPoint.position, Vector3.right, _rayLenght))
+                {
+                    _targetPosition = transform.position + Vector3.right;
+                    _startPosition = transform.position;
+                    _isMoving = true;
+                }
                 _isRotates = true;
                 break;
         }

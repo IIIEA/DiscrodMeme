@@ -16,7 +16,7 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
     public event UnityAction<string, string> PlayerAdded;
 
     [SerializeField] private List<string> _users = new List<string>();
-    [SerializeField] private Player[] _players;
+    [SerializeField] private PlayerData[] _players;
 
     #region Singleton
     public static DiscordManager Singleton { get; private set; }
@@ -132,7 +132,7 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
         {
             if (message.Content.Contains("!start"))
             {
-                _players = GetComponentsInChildren<Player>();
+                _players = GetComponentsInChildren<PlayerData>();
 
                 await DiscordAPI.CreateMessage(message.ChannelId, "Started", null, false, null, null, null, null);
             }
@@ -152,6 +152,10 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
             await Task.Delay(100);
 
             await AddEmoji(message.ChannelId, message.Id, "⬇️");
+
+            await Task.Delay(100);
+
+            await AddEmoji(message.ChannelId, message.Id, "🔫");
         }
 
         if (message.Author.Bot == null || message.Author.Bot == false)
@@ -229,7 +233,7 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
                 if (_users.Contains(messageReaction.UserId) == false)
                 {
                     _users.Add(messageReaction.UserId);
-                    PlayerAdded?.Invoke(messageReaction.UserId, messageReaction.Member.Nick);
+                    PlayerAdded?.Invoke(messageReaction.UserId, messageReaction.Member.User.Username);
 
                     await Task.Delay(20);
                 }
@@ -279,6 +283,19 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
                     if (_players[i].Index == messageReaction.UserId)
                     {
                         _players[i].Move("Down");
+                    }
+                }
+
+                await Task.Delay(100);
+            }
+
+            if (messageReaction.Emoji.Name == "🔫")
+            {
+                for (int i = 0; i < _players.Length; i++)
+                {
+                    if (_players[i].Index == messageReaction.UserId)
+                    {
+                        _players[i].Shoot();
                     }
                 }
 
