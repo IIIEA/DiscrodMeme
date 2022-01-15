@@ -37,8 +37,9 @@ public class Bullet : MonoBehaviour
             if(playerData.Index != this._playerData.Index)
             {
                 playerData.ApplyDamage(_damage);
-                Destroy(gameObject);
             }
         }
+
+        Destroy(gameObject);
     }
 }
