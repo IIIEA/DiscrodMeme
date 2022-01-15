@@ -8,6 +8,9 @@ public class CanvasLookAt : MonoBehaviour
 
     private void LateUpdate()
     {
-        _canvasTransform.LookAt(Camera.main.transform);
+        if (_canvasTransform != null)
+        {
+            _canvasTransform.LookAt(Camera.main.transform);
+        }
     }
 }

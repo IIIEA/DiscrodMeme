@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _shootPoint;
 
     private int _currentHealth;
+
+    public event UnityAction<int, int> HealthChanged;
 
     private void Start()
     {
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
     public void ApplyDamage(int damage)
     {
         _currentHealth -= damage;
+        HealthChanged?.Invoke(_currentHealth, _health);
 
         if(_currentHealth <= 0)
         {
