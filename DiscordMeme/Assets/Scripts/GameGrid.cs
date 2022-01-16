@@ -12,19 +12,20 @@ public class GameGrid : MonoBehaviour
 
     private GridCell[,] _grid;
 
-    private void Start()
+    public void SetSize(int weight, int height)
     {
-        Create(_height, _weight);
+        _weight = weight;
+        _height = height;
     }
 
-    private void Create(int height, int weight)
+    public void Create(int height, int weight)
     {
         if (_cellTemplate == null)
             Debug.LogError("Cell template is empty");
 
         _grid = new GridCell[height, weight];
 
-        _camera.transform.position = new Vector3(weight / 2, height / 1.3f, _camera.transform.position.z);
+        _camera.transform.position = new Vector3(weight / 2, height / 1.2f, _camera.transform.position.z);
 
         for (int x = 0; x < _height; x++)
         {

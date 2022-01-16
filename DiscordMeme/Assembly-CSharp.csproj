@@ -120,6 +120,7 @@
     <Compile Include="Assets\Scripts\UI\CanvasLookAt.cs" />
     <Compile Include="Assets\Scripts\UI\HelathBar.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerBar.cs" />
+    <Compile Include="Assets\Scripts\UI\ReadyButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

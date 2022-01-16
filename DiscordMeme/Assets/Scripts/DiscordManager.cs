@@ -13,6 +13,11 @@ public class DiscordManager : MonoBehaviour, IDiscordServerEvents, IDiscordMessa
     public string botToken;
     public DiscordLogLevel logLevel = DiscordLogLevel.None;
 
+    public void SetBotToken(string token)
+    {
+        botToken = token;
+    }
+
     public event UnityAction<string, string> PlayerAdded;
 
     [SerializeField] private List<string> _users = new List<string>();
